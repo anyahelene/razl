@@ -1,0 +1,8 @@
+MAIN: PRINT "HELLO, WORLD"
+PRINT "##### #   #  ###    #"
+	PRINT "   #   # #  #   #  ##"
+  	PRINT "  #     #    ###    #"
+	PRINT " #      #   #   #   #"
+	PRINT "#      # #  #   #   #"
+	PRINT "##### #   #  ###   ###"
+GOTO MAIN:
