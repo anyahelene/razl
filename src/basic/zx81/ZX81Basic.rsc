@@ -1,4 +1,4 @@
-module basic::ZX81Basic
+module basic::zx81::ZX81Basic
 import String;
 import List;
 import Set;

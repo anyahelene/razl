@@ -1,4 +1,4 @@
-module basic::makeFont
+module basic::zx81::MakeFont
 import IO;
 import String;
 import List;
@@ -10,11 +10,7 @@ list[str] dg = [stringChar(l) | l  <- [48..48+10]];
 
 // for(c <- uc+lc) { println(intercalate("\n", ["<charAt(c,0)> c", *["<l>$@" | l <- split("\n",pixelize(|file:///home/anya/git/hiptext/letters/<c>-16.txt|))]])+"@\n"); }
 
-public str hashize(str s) {
-	s = visit(s) {case /[▄▌▚▛▜▞▀█▐▙▟]/ => "#"}
-	s = visit(s) {case /[▗▖▝▘▒]/ => "+"}
-	return s;
-}
+
 public str makeFont(str name, int w, int h, bool hash = false) {
 	s = "flf2a$ <h> <(h*90)/100> <w> 0 0 0 126\n" + intercalate("", [figLetter(pixLetter(stringChar(i), w, h)) | i <- [32..127]]);
 	return hash ? hashize(s) : s;		

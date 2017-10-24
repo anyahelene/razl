@@ -1,8 +1,10 @@
 MAIN: PRINT "HELLO, WORLD"
-PRINT "##### #   #  ###    #"
+	PRINT "##### #   #  ###    #"
 	PRINT "   #   # #  #   #  ##"
   	PRINT "  #     #    ###    #"
 	PRINT " #      #   #   #   #"
 	PRINT "#      # #  #   #   #"
 	PRINT "##### #   #  ###   ###"
+	PAUSE 32768
+	CLS
 GOTO MAIN:

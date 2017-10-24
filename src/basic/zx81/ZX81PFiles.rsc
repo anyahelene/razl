@@ -1,4 +1,4 @@
-module basic::ZX81PFiles
+module basic::zx81::ZX81PFiles
 import String;
 import Map;
 import Set;
