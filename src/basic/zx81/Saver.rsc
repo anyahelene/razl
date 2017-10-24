@@ -1,11 +1,13 @@
-module basic::zx81::ZX81PFiles
+module basic::zx81::Saver
 import String;
 import Map;
 import Set;
 import List;
 import IO;
 import ParseTree;
-import basic::ZX81Basic;
+import basic::zx81::Syntax;
+import basic::zx81::Numbers;
+import basic::zx81::Charset;
 
 public int ramBottom = 0x4000;
 public int tapeBottom = 0x4009;
@@ -29,6 +31,7 @@ data PFile =
 		list[int] display,
 		list[int] variables
 	);
+public PFile PFile() = PFile(0,0,0,0,0,0,0,0,0,0,[],[],[]);
 
 
 private list[int] stdHeader = 
@@ -44,7 +47,7 @@ public PFile decodePFile(list[int] bytes) {
 	int decodeByte(int offset) = bytes[offset];
 	int decodeWord(int offset) = decodeUInt16(bytes[offset..offset+2]);
 	
-	PFile head = PFile(0,0,0,0,0,0,0,0,0,0,[],[],[]);
+	PFile head = PFile();
 	head.version = decodeByte(0); // VERSN
     head.currentLine = decodeWord(1); // E_PPC
     head.displayArea = decodeWord(3); // D_FILE
@@ -115,6 +118,13 @@ public void printHeader(PFile head) {
 	println("   <toHex(head.spareArea,4)>  \u258C Spare area");
 	println("   <toHex(head.calcStack,4)>  \u258C Calculator stack");
 	println("   <toHex(ramTop, 4)>  \u2599 RAMTOP");
+}
+
+public list[int] encodePFile(Program p) {
+	PFile pf = PFile();
+	pf.program = tokens(p.lines);
+	// pf.variables = tokens(p.variables);
+	return encodePFile(pf);
 }
 
 public list[int] encodePFile(PFile head) {
