@@ -17,7 +17,11 @@ Using ZX-Presenter is quite straight-forward:
 * "Compile" the BASIC program to a `.p` file with the ZX81 language tools
 
 * Convert to WAV format, connect your headphone output to the
-  ZX81's EAR, run `LOAD ""` and start the "tape" transfer from your computer 
+  ZX81's EAR, run `LOAD ""` on the ZX81, and play the audio file. Enjoy the
+  wonders of uploading on a ~300 bps line.
+
+* Repeat the last bit until it succeeds, possibly tuning the audio parameters a bit.
+
 
 
 ## Rascal commands

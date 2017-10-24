@@ -1,4 +1,4 @@
-module assembly::Z80
+module assembly::z80::Z80
 import ParseTree;
 import String;
 import Set;

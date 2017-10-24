@@ -31,8 +31,11 @@ public Program readLines(ZX81Lines ls, Program p) {
 			line = toInt("<n>");
 		}
 		else if([(ZX81LineNum)`<NAME n>:`] := lineNum.args) {
+			oldLine = line;
 			line = autoInc(line, autoStep);			
 			p.labels["<n>"] = line;
+			// go back to previous line number if there's no command attached
+			line = cmd == (ZX81Cmd)`` ? oldLine : line;
 		}
 		else {
 			line = autoInc(line, autoStep);

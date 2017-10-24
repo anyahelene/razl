@@ -1,8 +1,13 @@
-module basic::zx81::MakeFont
+module basic::zxPresenter::MakeFont
 import IO;
 import String;
 import List;
 import basic::ZX81Basic;
+
+// Utility functions to create FIGlet fonts
+// Can also generate a shell script to script the
+// production of the necessary image files 
+
 
 list[str] uc = [stringChar(l) | l  <- [65..65+26]];
 list[str] lc = [toLowerCase(stringChar(l)) | l  <- [65..65+26]];
@@ -35,12 +40,12 @@ public str figLetter(str glyph) {
 	return intercalate("\n", ["<l>$@" | l <- split("\n",glyph)])+"@\n"; 
 }
 
-public str pixLetter(str letter, int w, int h) {
+public str pixLetter(str path, str letter, int w, int h) {
 	loc f;
 	if(/[a-zA-Z0-9]/ := letter)
-		f = |file:///home/anya/git/hiptext/letters/<letter>-<"<w>x<h>">.txt|;
+		f = |file://<path>/<letter>-<"<w>x<h>">.txt|;
 	else
-		f = |file:///home/anya/git/hiptext/letters/<"<charAt(letter,0)>">-<"<w>x<h>">.txt|;
+		f = |file://<path>/<"<charAt(letter,0)>">-<"<w>x<h>">.txt|;
 	if(exists(f)) {
 		return pixelize(f, true);
 	}

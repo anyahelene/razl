@@ -1,4 +1,5 @@
-MAIN: PRINT "HELLO, WORLD"
+MAIN:
+	PRINT "HELLO, WORLD"
 	PRINT "##### #   #  ###    #"
 	PRINT "   #   # #  #   #  ##"
   	PRINT "  #     #    ###    #"
