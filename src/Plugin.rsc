@@ -3,8 +3,8 @@ module Plugin
 import util::IDE;
 import ParseTree;
 import IO;
-import assembly::Unified;
-import assembly::zx80::Z80;
+import assembler::Unified;
+import assembler::z80::Z80;
 import basic::zx81::Syntax;
 
 void main() {
@@ -15,8 +15,16 @@ void main() {
 
    registerLanguage("Z80", "z80", Tree(str src, loc l) {
      pt = parse(#start[Program], src, l);
-     return annotate(pt);
+     //return annotate(pt);
+     return pt;
    });
+   
+   //registerAnnotator("z80", Tree (Tree t) { println("anno!"); return t[@doc="Hello!"]; });
+   
+   registerContributions("Z80", {
+   	annotator(Tree (Tree t) { return (assembler::z80::Z80::annotate(t))[@doc="foo!"]; }),
+   	builder(set[Message] (Tree t) { println("build!"); return {error("foo", t@\loc)}; })
+   	});
    
    registerLanguage("ZX81 BASIC", "zxb", Tree(str src, loc l) {
      pt = parse(#start[ZX81Lines], src, l);

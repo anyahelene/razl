@@ -1,8 +1,10 @@
-module assembly::z80::Z80
+module assembler::z80::Z80
 import ParseTree;
 import String;
 import Set;
-import assembly::Unified;
+import assembler::Unified;
+import IO;
+
 
 private set[str] registers8bit = {"a", "b", "c", "d", "e", "h", "l"};
 private set[str] registers16bit = {"bc", "de", "hl"};
@@ -170,7 +172,9 @@ public bool isCC(str name) {
 }
 
 public &T<:Tree annotate(&T<:Tree tree) {
+	println("annotate!");
 	return visit(tree) {
+		case IdentifierAtom i => isRegister(unparse(i)) ? i[@doc="Constant"] : i
 		case IdentifierAtom i => isRegister(unparse(i)) ? i[@category="Constant"] : i
 		case OpCodeName i => isOperation(unparse(i)) ? i[@category="MetaKeyword"] : i[@category="MetaAmbiguity"]
 	}

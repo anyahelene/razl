@@ -1,4 +1,4 @@
-module assembly::Unified
+module assembler::Unified
 
 syntax Atom
 	= IdentifierAtom val
