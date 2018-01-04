@@ -1,0 +1,56 @@
+prelude: {
+default: #const (#a,#b) => if #a == ? then #b else #a
+max:	#const (#a,#b) => if #default(#a,0) > #default(#b,0) then #a else #b
+	#use int = data(type=signed)
+	#use unt = data(type=unsigned)
+	#use flt = data(type=float)
+	#use bit = data(1 bit, type=logic)
+
+foo:	#define int r, bit c, bit n, bit v, bit z = add(int a, int b) { 
+			let r, c, n, v, z = addi(a, b)
+		}
+	#define unt c = add(unt a, unt b) {
+			let c = addu(a, b)
+	}
+	#define flt c = add(flt a, flt b) {
+			let c = addf(a, #foo)
+	}
+	#define int r, bit c, bit n, bit v, bit z  = sub(int(bits=#x) a, int(bits=#y) b) {
+			#let #bitSize = #max(#x,#y)
+			let r, c, n, v, z = subi#bitSize(a, b)
+	}
+	
+	//#define int r, bit c, bit n, bit v, bit z = subi(int bs, int(bits=#bs) a, int(bits=#bs) b) {
+	//	return bs, a, b
+	//}
+	#define unt c = sub(unt a, unt b) { 
+			let c = subi(a, b)
+	}
+	#define flt c = sub(flt a, flt b) { 
+			let c = subi(a, b)
+	}
+	#use int
+	//#define flt[l] add(flt[l] a, flt[l] b) = addvf(a, b, l)
+}
+
+main:
+	#var result
+	let result = fac(5)
+	return result
+	
+fac:
+	#use int(32)
+	#var n
+	let n = param()
+	if n <= 1 goto END
+	//#var t0
+	let t0 = sub(n, 1)
+	#var data() t3
+	let t0 = sub(n, t3)
+	#var t1
+	let t1 = fac(t0)
+	let n  = mul(n, t1)
+END:
+	return n
+	
+initial: #const 5

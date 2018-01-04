@@ -6,8 +6,13 @@ import IO;
 import assembler::Unified;
 import assembler::z80::Z80;
 import basic::zx81::Syntax;
+import intermediate::TIC;
 
 void main() {
+   registerLanguage("TIC", "tic", Tree(str src, loc l) {
+     pt = parseTic(src);
+     return pt;
+   });
    registerLanguage("TAC", "tac", Tree(str src, loc l) {
      pt = parse(#start[TacProgram], src, l);
      return pt;
