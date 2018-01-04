@@ -1,12 +1,5 @@
-x x add,vv,x,"foo"
-a bfds
-x 'a'
-
 		add b, c
 hello	db	"Hello, world!"
 hello	db "Hello"
 		add bc, def
 		add foo, bar
-
-		
-		
