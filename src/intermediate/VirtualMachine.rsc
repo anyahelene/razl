@@ -14,8 +14,8 @@ data Program = Program(map[Name, Function] functions);
 
 data ProcessorState = State(
 	list[Value] memory,
-	int pc,
-	int sp,
+	int pc,  // program counter – next instruction to execute
+	int sp,  // stack pointer
 	bool flagZero,
 	bool flagOverflow,
 	bool flagReturn

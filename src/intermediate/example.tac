@@ -1,5 +1,6 @@
 main() {
 	result = fac(5);
+	return result;
 }
 
 fac(n) {
@@ -10,5 +11,4 @@ fac(n) {
 		n  = n * t1;
 END:	return n;
 }
-
 
