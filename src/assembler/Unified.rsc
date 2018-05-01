@@ -38,19 +38,22 @@ lexical Char
 	
 start syntax Program = Instruction* instructions;
 
-syntax EMPTY = ;
-syntax EOL = EMPTY $;
-syntax Comment = @category="Comment" ";" ![\n]* $;
-syntax Whitespace = [\ \t\n];
-layout Layout = (Comment | Whitespace)* !>> [\ \t\n];
+lexical EMPTY = ;
+lexical EOL = EMPTY $;
+lexical SOL = ^ EMPTY;
+lexical Com = @category="Comment" ";" ![\r\n]*;
+lexical WS = [\ \t];
+layout Layout = WS* !>> [\ \t];
 
 syntax Instruction
-	= @label="foo" Label? label OpCodeName opCode {Operand ","}* operands $
+	= @label="foo" Label? label OpCodeName opCode {Operand ","}* operands Com? $
+	| "#" "define" Identifier name ![\r\n]* expansion $
+	| SOL Com? $
 	;
 syntax OpCodeName = @category="Constant" Identifier;
 syntax Label = @category="Identifier" ^ Identifier;
 
-anno loc Whitespace@\loc;
+anno loc WS@\loc;
 
 anno loc Layout@\loc;
 anno loc Instruction@\loc;
